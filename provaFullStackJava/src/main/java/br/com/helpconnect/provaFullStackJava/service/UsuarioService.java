@@ -1,5 +1,6 @@
 package br.com.helpconnect.provaFullStackJava.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -88,6 +89,14 @@ public class UsuarioService {
 
 		return Optional.empty();
 	
+	}
+	
+	public List<Usuario> getAll() {
+		return usuarioRepository.findAll();
+	}
+	
+	public Optional<Usuario> getById(long id) {
+		return usuarioRepository.findById(id);
 	}
 	
 	private String gerarToken(String usuario) {

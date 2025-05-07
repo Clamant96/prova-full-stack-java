@@ -1,11 +1,14 @@
 package br.com.helpconnect.provaFullStackJava.controller;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,14 +20,28 @@ import br.com.helpconnect.provaFullStackJava.model.Usuario;
 import br.com.helpconnect.provaFullStackJava.service.UsuarioService;
 
 @RestController
-@RequestMapping("/usuarios")
+@RequestMapping("/usuario")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class UsuarioController {
 
 	@Autowired
 	private UsuarioService usuarioService;
+	
+	@GetMapping
+	public ResponseEntity<List<Usuario>> getAll(){
+		
+		return ResponseEntity.ok(usuarioService.getAll());
+	}
+	
+	@GetMapping("/{id}")
+	public ResponseEntity<Usuario> getById(@PathVariable("id") long id){
+		
+		return usuarioService.getById(id)
+				.map(resp -> ResponseEntity.ok(resp))
+				.orElse(ResponseEntity.notFound().build());
+	}
 
-	@PostMapping("/logar")
+	@PostMapping("/login")
 	public ResponseEntity<UserLogin> autenticarUsuario(@RequestBody Optional<UserLogin> usuarioLogin){
 		
 		return usuarioService.autenticarUsuario(usuarioLogin)
