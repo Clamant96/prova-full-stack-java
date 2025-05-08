@@ -1,0 +1,34 @@
+<section>
+  <div class="blocos">
+    <div class="bloco" style="background-position: center; background-size: 150%; background-image: url(img/background/background_01.png);">
+    </div>
+    <div class="bloco">
+      <div class="inputs">
+        <div class="input">
+          <input type="text" [(ngModel)]="this.usuario.nome" placeholder="Nome" />
+        </div>
+        <div class="input">
+          <input type="text" [(ngModel)]="this.usuario.email" placeholder="E-mail" />
+        </div>
+        <div class="input">
+          <input type="password" [(ngModel)]="this.usuario.senha" placeholder="Senha" />
+        </div>
+        <div class="input">
+          <select [(ngModel)]="this.usuario.role" (change)="this.handleTipoDeContato($event)" >
+            <option value="">-- Selecione um perfil --</option>
+            @for (role of this.roles; track $index) {
+              <option [value]="role">{{role}}</option>
+            }
+          </select>
+        </div>
+      </div>
+      <div class="botao" (click)="this.cadastrar()" >
+        <span>Cadastrar</span>
+      </div>
+      <div class="hr"></div>
+      <div class="cadastrar">
+        Já tem cadastro ? <span routerLink="/login" >Login</span>
+      </div>
+    </div>
+  </div>
+</section>

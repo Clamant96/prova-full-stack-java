@@ -1,0 +1,23 @@
+<section>
+  <div class="blocos">
+    <div class="bloco">
+      <div class="inputs">
+        <div class="input">
+          <input type="text" [(ngModel)]="this.userLogin.email" placeholder="E-mail" />
+        </div>
+        <div class="input">
+          <input type="password" [(ngModel)]="this.userLogin.senha" placeholder="Senha" />
+        </div>
+      </div>
+      <div class="botao" (click)="this.auth()" >
+        <span>Login</span>
+      </div>
+      <div class="hr"></div>
+      <div class="cadastrar">
+        Não tem cadastro ? <span routerLink="/cadastrar" routerLinkActive="router-link-active" >Cadastre-se</span>
+      </div>
+    </div>
+    <div class="bloco" style="background-position: center; background-size: 150%; background-image: url(img/background/background_01.png);">
+    </div>
+  </div>
+</section>
