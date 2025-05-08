@@ -18,30 +18,29 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.helpconnect.provaFullStackJava.model.UserLogin;
-import br.com.helpconnect.provaFullStackJava.model.Usuario;
-import br.com.helpconnect.provaFullStackJava.service.UsuarioService;
+import br.com.helpconnect.provaFullStackJava.model.Endereco;
+import br.com.helpconnect.provaFullStackJava.service.EnderecoService;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/usuario")
+@RequestMapping("/endereco")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
-public class UsuarioController {
+public class EnderecoController {
 
 	@Autowired
-	private UsuarioService usuarioService;
+	private EnderecoService enderecoService;
 	
 	@GetMapping
 	@PreAuthorize("hasRole('ADMIN')")
-	public ResponseEntity<Page<Usuario>> getAll(
+	public ResponseEntity<Page<Endereco>> getAll(
 			@RequestParam(value = "page", defaultValue = "0") int page,
             @RequestParam(value = "size", defaultValue = "10") int size,
-            @RequestParam(value = "sortBy", defaultValue = "nome") String sortBy,
+            @RequestParam(value = "sortBy", defaultValue = "cep") String sortBy,
             @RequestParam(value = "direction", defaultValue = "ASC") String direction,
             @RequestParam(value = "filtro", required = false) String filtro
-            ){
+        ){
 		
-		return ResponseEntity.ok(usuarioService.getAllPagable(
+		return ResponseEntity.ok(enderecoService.getAllPagable(
 				page,
 	            size,
 	            sortBy,
@@ -52,41 +51,41 @@ public class UsuarioController {
 	}
 	
 	@GetMapping("/{id}")
-	@PreAuthorize("hasRole('ADMIN') or hasRole('USER') or #id == principal.id")
-	public ResponseEntity<Usuario> getById(@PathVariable("id") long id){
+	@PreAuthorize("hasRole('ADMIN') or hasRole('USER')")
+	public ResponseEntity<Endereco> getById(@PathVariable("id") long id){
 		
-		return usuarioService.getById(id)
+		return enderecoService.getById(id)
 				.map(resp -> ResponseEntity.ok(resp))
 				.orElse(ResponseEntity.notFound().build());
 	}
-
-	@PostMapping("/login")
+	
+	@GetMapping("/cep/{cep}")
 	@PreAuthorize("hasRole('ADMIN') or hasRole('USER')")
-	public ResponseEntity<UserLogin> autenticarUsuario(@Valid @RequestBody Optional<UserLogin> usuarioLogin){
+	public ResponseEntity<Endereco> getByCep(@PathVariable("cep") String cep){
 		
-		return usuarioService.autenticarUsuario(usuarioLogin)
-				.map(resposta -> ResponseEntity.status(HttpStatus.OK).body(resposta))
-				.orElse(ResponseEntity.status(HttpStatus.UNAUTHORIZED).build());
+		return enderecoService.getByCep(cep)
+				.map(resp -> ResponseEntity.ok(resp))
+				.orElse(ResponseEntity.notFound().build());
 	}
-
+	
 	@PostMapping("/cadastrar")
 	@PreAuthorize("hasRole('ADMIN') or hasRole('USER')")
-	public ResponseEntity<Optional<Usuario>> cadastrarUsuario(@Valid @RequestBody Usuario usuario) {
+	public ResponseEntity<Optional<Endereco>> cadastrarEndereco(@Valid @RequestBody Endereco endereco) {
 		return ResponseEntity.status(HttpStatus.CREATED)
-				.body(usuarioService.cadastrarUsuario(usuario));
+				.body(enderecoService.cadastrarEndereco(endereco));
 	}
 	
 	@PutMapping("/atualizar")
-	@PreAuthorize("hasRole('ADMIN') or hasRole('USER') or #id == principal.id")
-	public ResponseEntity<Optional<Usuario>> atualizarUsuario(@Valid @RequestBody Usuario usuario) {
+	@PreAuthorize("hasRole('ADMIN') or hasRole('USER')")
+	public ResponseEntity<Optional<Endereco>> atualizarEndereco(@Valid @RequestBody Endereco endereco) {
 		return ResponseEntity.status(HttpStatus.OK)
-				.body(usuarioService.atualizarUsuario(usuario));
+				.body(enderecoService.atualizarEndereco(endereco));
 	}
 	
 	@DeleteMapping("/{id}")
 	@PreAuthorize("hasRole('ADMIN')")
 	public void deleteById(@PathVariable("id") long id){
-		usuarioService.deleteById(id);
+		enderecoService.deleteById(id);
 	}
 	
 }

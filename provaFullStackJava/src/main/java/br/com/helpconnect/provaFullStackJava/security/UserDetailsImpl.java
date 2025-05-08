@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.List;
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import br.com.helpconnect.provaFullStackJava.model.Usuario;
@@ -22,6 +23,7 @@ public class UserDetailsImpl implements UserDetails {
 	public UserDetailsImpl(Usuario user) {
 		this.userName = user.getEmail();
 		this.password = user.getSenha();
+		this.authorities = user.getAuthorities();
 	}
 	
 	public UserDetailsImpl() {}
