@@ -57,9 +57,10 @@ public class UsuarioService {
                 userLogin.get().setNome(usuario.get().getNome());
                 userLogin.get().setEmail(usuario.get().getEmail());
                 userLogin.get().setToken(token);
+                userLogin.get().setSenha(null);
                 
                 // Não retornar a senha por segurança
-                userLogin.get().setSenha(null);
+                userLogin.get().setRole(usuario.get().getRole().name());
                 
                 return userLogin;
             }

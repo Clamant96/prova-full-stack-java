@@ -50,6 +50,26 @@ public class EnderecoController {
 		);
 	}
 	
+	@GetMapping("/enderecos/usuario/{id}")
+	@PreAuthorize("hasRole('ADMIN') or hasRole('USER')")
+	public ResponseEntity<Page<Endereco>> getAllByUsuarioId(
+			@RequestParam(value = "page", defaultValue = "0") int page,
+            @RequestParam(value = "size", defaultValue = "10") int size,
+            @RequestParam(value = "sortBy", defaultValue = "cep") String sortBy,
+            @RequestParam(value = "direction", defaultValue = "ASC") String direction,
+            @PathVariable("id") long id
+	){
+		
+		return ResponseEntity.ok(enderecoService.getAllEnderecosByUsuarioId(
+				page,
+	            size,
+	            sortBy,
+	            direction,
+	            id
+            )
+		);
+	}
+	
 	@GetMapping("/{id}")
 	@PreAuthorize("hasRole('ADMIN') or hasRole('USER')")
 	public ResponseEntity<Endereco> getById(@PathVariable("id") long id){
@@ -85,6 +105,7 @@ public class EnderecoController {
 	@DeleteMapping("/{id}")
 	@PreAuthorize("hasRole('ADMIN')")
 	public void deleteById(@PathVariable("id") long id){
+		System.out.println("DELETAR ITEM: "+ id);
 		enderecoService.deleteById(id);
 	}
 	

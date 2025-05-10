@@ -12,6 +12,8 @@ public class UserLogin {
 	
 	private String token;
 	
+	private String role;
+	
 	public long getId() {
 		return id;
 	}
@@ -50,6 +52,14 @@ public class UserLogin {
 
 	public void setToken(String token) {
 		this.token = token;
+	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
 	}
 	
 }

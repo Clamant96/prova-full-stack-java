@@ -86,6 +86,29 @@ public class EnderecoService {
         return enderecos;
 	}
 	
+	public Page<Endereco> getAllEnderecosByUsuarioId(
+			int page,
+            int size,
+            String sortBy,
+            String direction,
+			long id
+    ) {
+		Sort.Direction sortDirection;
+        try {
+            sortDirection = Sort.Direction.fromString(direction);
+        } catch (IllegalArgumentException e) {
+            sortDirection = Sort.Direction.ASC;
+        }
+
+        Pageable pageable = PageRequest.of(
+            page, 
+            size, 
+            Sort.by(sortDirection, sortBy)
+        );
+        
+		return enderecoRepository.findAllEnderecosByUsuario_Id(id, pageable);
+	}
+	
 	public Page<Endereco> getAll(Pageable pageable) {
         return enderecoRepository.findAll(pageable);
     }

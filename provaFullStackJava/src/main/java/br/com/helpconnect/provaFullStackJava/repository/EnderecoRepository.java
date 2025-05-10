@@ -13,12 +13,19 @@ import br.com.helpconnect.provaFullStackJava.model.Endereco;
 public interface EnderecoRepository extends JpaRepository<Endereco, Long> {
 
 	// Consulta JPQL com ordenação dinâmica
-    @Query("SELECT e FROM Endereco e WHERE " +
-           "LOWER(e.cep) LIKE LOWER(concat('%', :filtro, '%')) OR " +
-           "LOWER(e.logradouro) LIKE LOWER(concat('%', :filtro, '%'))")
+	@Query("SELECT e FROM Endereco e WHERE " +
+		       "LOWER(e.cep) LIKE LOWER(concat('%', :filtro, '%')) OR " +
+		       "LOWER(e.logradouro) LIKE LOWER(concat('%', :filtro, '%')) OR " +
+		       "CAST(e.usuario AS string) LIKE LOWER(concat('%', :filtro, '%'))")
     Page<Endereco> findByCepContainingOrLogradouroContaining(
         @Param("filtro") String filtro,
         Pageable pageable
     );
+	
+	@Query("SELECT e FROM Endereco e WHERE e.usuario.id = :id")
+	Page<Endereco> findAllEnderecosByUsuario_Id(
+	     @Param("id") long id,
+	     Pageable pageable
+	);
     
 }
