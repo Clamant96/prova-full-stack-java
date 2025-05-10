@@ -1,0 +1,43 @@
+<section>
+  <div class="lista">
+    <table>
+      <thead>
+        <tr>
+          <th>Logradouro</th>
+          <th>Numero</th>
+          <th>Complemento</th>
+          <th>Bairro</th>
+          <th>Cidade</th>
+          <th>Estado</th>
+          <th>Cep</th>
+          <th>Data Cadastro</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (endereco of this.enderecos; track $index) {
+          <tr (click)="this.enviaIdEnderecoOutput(endereco.id)" >
+            <td>{{endereco.logradouro}}</td>
+            <td>{{endereco.numero}}</td>
+            <td>{{endereco.complemento}}</td>
+            <td>{{endereco.bairro}}</td>
+            <td>{{endereco.cidade}}</td>
+            <td>{{endereco.estado}}</td>
+            <td>{{endereco.cep}}</td>
+            <td>{{this.formatarData(endereco.dataCadastro)}}</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+  <div class="controle">
+    <div class="img" (click)="this.retroceder()" >
+      <img src="img/icon/retroceder.svg" alt="retroceder" />
+    </div>
+    <div class="itens">
+      <span>{{this.totalElements}}</span>
+    </div>
+    <div class="img" (click)="this.avancar()" >
+      <img src="img/icon/avancar.svg" alt="avancar" />
+    </div>
+  </div>
+</section>

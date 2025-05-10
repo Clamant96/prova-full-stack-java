@@ -1,0 +1,15 @@
+section {
+  width: 100%;
+  height: auto;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+
+section .informacoes {
+  width: 80%;
+  height: auto;
+
+}

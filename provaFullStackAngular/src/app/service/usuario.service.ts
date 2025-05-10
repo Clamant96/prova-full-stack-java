@@ -4,6 +4,7 @@ import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs';
 import { Usuario } from '../model/Usuario';
 import { UserLogin } from '../model/UserLogin';
+import { Page } from '../model/Page';
 
 @Injectable({
   providedIn: 'root'
@@ -20,8 +21,14 @@ export class UsuarioService {
     private http: HttpClient
   ) { }
 
-  getAll(): Observable<Usuario[]> {
-    return this.http.get<Usuario[]>(`${this.url}/usuario`, this.autorizacao)
+  getAll(
+    page: number,
+    size: number,
+    sortBy: string,
+    direction: string
+  ): Observable<Page> {
+    let query = `?page=${page}&size=${size}&sortBy=${sortBy}&direction=${direction}`;
+    return this.http.get<Page>(`${this.url}/usuario${query}`, this.autorizacao)
   }
 
   getById(id: number): Observable<Usuario> {
@@ -42,6 +49,21 @@ export class UsuarioService {
 
   deleteById(id: number) {
     return this.http.delete(`${this.url}/usuario/${id}`, this.autorizacao)
+  }
+
+  logado() {
+    /* CRIA UMA VARIAVEL BOOLEAN */
+    let ok: boolean = false;
+
+    /* CRIA UMA CONDIZIONAL, CASO MEU TOKEN QUE VEM DA MINHA VARIAVEL BLOBAL, ESTEJA COM ALGUM DADO, ATRIBUA 'true' A MINHA VARIAVEL 'ok' */
+    if(environment.token != '') {
+      /* ATRIBUI 'true' A VARAIVEL 'ok' */
+      ok = true;
+
+    }
+
+    /* RETORNA O VALOR DA VARIAVEL */
+    return ok;
   }
 
 }

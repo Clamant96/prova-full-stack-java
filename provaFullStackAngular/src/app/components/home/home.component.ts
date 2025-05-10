@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { environment } from '../../../environments/environment';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -9,4 +11,16 @@ import { Component } from '@angular/core';
 })
 export class HomeComponent {
 
+  public nome: string = environment.nome;
+
+  constructor(
+    private router: Router,
+  ){}
+
+  ngOnInit() {
+    if(environment.token == "") {
+      this.router.navigate(['/login']);
+    }
+
+  }
 }

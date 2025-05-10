@@ -1,1 +1,13 @@
-<p>header works!</p>
+<header>
+  <nav class="menu">
+    <div class="botao" routerLink="/lista/usuarios" >
+      <span>Usuarios</span>
+    </div>
+    <div class="botao" routerLink="/lista/enderecos" >
+      <span>Endereços</span>
+    </div>
+    <div class="img" [routerLink]="['/editar/usuario', this.id]" >
+      <img src="img/perfil/perfil.png" alt="perfil" />
+    </div>
+  </nav>
+</header>

@@ -1,0 +1,189 @@
+section {
+  width: 100%;
+  height: auto;
+
+  background-color: var(--background-color-1);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+
+section .bloco {
+  width: 95%;
+  height: auto;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+}
+
+section .bloco .inputs {
+  width: 100%;
+  height: auto;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  flex-wrap: wrap;
+
+}
+
+section .bloco .inputs .input {
+  margin-bottom: 0.5%;
+
+  width: 100%;
+  height: auto;
+
+}
+
+section .bloco .inputs .input input {
+  padding: 0% 1%;
+
+  width: 98%;
+  height: 40px;
+
+  border-radius: 5px;
+
+  border: 1px solid var(--border-style-input);
+
+  font-family: var(--font-family-Amaranth);
+  font-size: 14px;
+  font-weight: 500;
+
+  color: var(--text-input);
+
+  outline: none;
+
+}
+
+section .bloco .inputs .input select {
+  padding: 3% 1.5%;
+
+  width: 100%;
+  height: auto;
+
+  border-radius: 5px;
+
+  border: 1px solid var(--border-style-input);
+
+  font-family: var(--font-family-Amaranth);
+  font-size: 14px;
+  font-weight: 500;
+
+  color: var(--text-input);
+
+  outline: none;
+
+}
+
+section .bloco .botoes {
+  width: 100%;
+  height: auto;
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+}
+
+section .bloco .botoes .botao {
+  background-color: var(--background-color-button);
+
+  width: 15%;
+  height: 40px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 5px;
+
+  border: 1px solid var(--border-style-input);
+
+  cursor: pointer;
+
+  transition: background-color, 0.2s ease-in-out;
+
+}
+
+section .bloco .botoes .botao span {
+  color: var(--text-white);
+
+  font-family: var(--font-family-Amaranth);
+  font-size: 16px;
+  font-weight: 600;
+
+}
+
+section .bloco .botoes .botao:hover {
+  background-color: var(--background-color-button-hover);
+
+}
+
+section .bloco .botoes .cancelar {
+  margin-right: 1%;
+
+  background-color: var(--background-color-danger);
+
+}
+
+section .bloco .botoes .cancelar:hover {
+  background-color: var(--background-color-danger-hover);
+
+}
+
+section .bloco .botoes .img {
+  margin-right: 1%;
+
+  width: 24px;
+  height: 24px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+
+}
+
+section .bloco .botoes .img img {
+  width: 24px;
+  height: 24px;
+
+}
+
+section .bloco .hr {
+  margin-top: 3%;
+  margin-bottom: 2%;
+
+  width: 40%;
+  height: auto;
+
+  border-top: 2px solid var(--border-style-input);
+  border-bottom: 0px solid var(--border-style-input);
+  border-left: 0px solid var(--border-style-input);
+  border-right: 0px solid var(--border-style-input);
+
+}
+
+section .bloco .cadastrar {
+  color: var(--text-default);
+
+  font-size: 16px;
+  font-weight: 500;
+
+}
+
+section .bloco .cadastrar span {
+  color: var(--text-link-2);
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+}

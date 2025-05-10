@@ -1,0 +1,36 @@
+<section>
+  <div class="lista">
+    <table>
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>E-mail</th>
+          <th>Data Cadastro</th>
+          <th>Perfil</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (usuario of this.usuarios; track $index) {
+          <tr (click)="this.editarPerfil(usuario.id)" >
+            <td>{{usuario.nome}}</td>
+            <td>{{usuario.email}}</td>
+            <td>{{this.formatarData(usuario.dataCadastro)}}</td>
+            <td>{{usuario.role}}</td>
+
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+  <div class="controle">
+    <div class="img" (click)="this.retroceder()" >
+      <img src="img/icon/retroceder.svg" alt="retroceder" />
+    </div>
+    <div class="itens">
+      <span>{{this.totalElements}}</span>
+    </div>
+    <div class="img" (click)="this.avancar()" >
+      <img src="img/icon/avancar.svg" alt="avancar" />
+    </div>
+  </div>
+</section>

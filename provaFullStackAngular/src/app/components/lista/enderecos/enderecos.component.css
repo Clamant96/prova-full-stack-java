@@ -1,0 +1,122 @@
+section {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+.lista {
+  overflow-x: auto;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+  border-radius: 8px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: var(--background-color-white-1);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 0.9em;
+  min-width: 800px;
+}
+
+thead {
+  background-color: var(--background-color-button);
+  color: var(--text-white);
+  position: sticky;
+  top: 0;
+}
+
+th {
+  padding: 12px 15px;
+  text-align: left;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.85em;
+  letter-spacing: 0.5px;
+}
+
+td {
+  padding: 10px 15px;
+  color: #444;
+  border-bottom: 1px solid #ecf0f1;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #f8f9fa;
+
+}
+
+tbody tr:hover {
+  background-color: #f1f4f7;
+  transition: background-color 0.2s ease;
+}
+
+th:first-child {
+  border-radius: 8px 0 0 0;
+}
+
+th:last-child {
+  border-radius: 0 8px 0 0;
+}
+
+td:not(:last-child),
+th:not(:last-child) {
+  border-right: 1px solid #ecf0f1;
+}
+
+tr {
+  cursor: pointer;
+
+}
+
+section .controle {
+  width: 100%;
+  height: auto;
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+}
+
+section .controle .img {
+  padding: 1%;
+
+  width: 24px;
+  height: 24px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+
+}
+
+section .controle .img img {
+  width: 24px;
+  height: 24px;
+
+}
+
+section .controle .itens {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-family: var(--font-family-Amaranth);
+  font-size: 14px;
+  font-weight: 500;
+
+}
+
+/* Responsividade */
+@media screen and (max-width: 768px) {
+  section {
+    padding: 0 0.5rem;
+  }
+
+  td, th {
+    padding: 8px 10px;
+  }
+}

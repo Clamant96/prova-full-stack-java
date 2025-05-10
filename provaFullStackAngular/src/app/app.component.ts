@@ -1,6 +1,8 @@
+import { UsuarioService } from './service/usuario.service';
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { HeaderComponent } from "./components/util/header/header.component";
+import { environment } from '../environments/environment';
 
 @Component({
   selector: 'app-root',
@@ -11,4 +13,11 @@ import { HeaderComponent } from "./components/util/header/header.component";
 })
 export class AppComponent {
   title = 'provaFullStackAngular';
+
+  public isHeader: boolean = environment.token != '';
+
+  constructor(
+    public usuarioService: UsuarioService
+  ) {}
+
 }

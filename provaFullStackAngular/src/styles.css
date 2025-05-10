@@ -13,62 +13,64 @@
 
 /* APLICANDO CONFIGURACOES GLOBAIS PARA SEU PROJETO */
 html {
-    scroll-behavior: smooth;
+  scroll-behavior: smooth;
 
 }
 
 html, body {
-    height: 100%;
+  height: 100%;
 
-    font-family: 'Titillium Web', sans-serif;
+  font-family: 'Titillium Web', sans-serif;
+
+  background-color: var(--background-color-1);
 
 }
 
 /* APLICANDO CONFIGURACOES GLOBAIS PARA O H1 */
 h1 {
-    font-family: 'Amaranth', sans-serif;
-    font-size: 44px !important;
-    font-weight: 600 !important;
+  font-family: 'Amaranth', sans-serif;
+  font-size: 44px !important;
+  font-weight: 600 !important;
 
-    color: var(--text-title);
+  color: var(--text-title);
 
 }
 
 /* APLICANDO CONFIGURACOES GLOBAIS PARA O H2 */
 h2 {
-    font-family: 'Amaranth', sans-serif;
-    font-size: 28px;
+  font-family: 'Amaranth', sans-serif;
+  font-size: 28px;
 
-    color: var(--text-title);
+  color: var(--text-title);
 
 }
 
 /* APLICANDO CONFIGURACOES GLOBAIS PARA O H3 */
 h3 {
-    font-size: 14px;
-    font-weight: 400;
+  font-size: 14px;
+  font-weight: 400;
 
-    color: var(--text-author);
+  color: var(--text-author);
 
 }
 
 /* APLICANDO CONFIGURACOES GLOBAIS PARA O P */
 p {
-    color: var(--text-default);
+  color: var(--text-default);
 
 }
 
 /* APLICANDO CONFIGURACOES GLOBAIS PARA O HR */
 hr {
-    width: 80%;
-    height: auto;
+  width: 80%;
+  height: auto;
 
-    margin-left: 10%;
+  margin-left: 10%;
 
-    border-top: 0px solid var(--border-style-search);
-    border-left: 0px solid var(--border-style-search);
-    border-right: 0px solid var(--border-style-search);
-    border-bottom: 1px solid var(--border-style-search);
+  border-top: 0px solid var(--border-style-search);
+  border-left: 0px solid var(--border-style-search);
+  border-right: 0px solid var(--border-style-search);
+  border-bottom: 1px solid var(--border-style-search);
 
 }
 
@@ -87,6 +89,7 @@ hr {
 
   --background-color-1: #f9f9f9;
 
+  --background-color-white-1: #f1f1f1;
   --background-color-button: #3bc;
   --background-color-button-hover: rgb(43, 161, 177);
   --background-color-copyright: #191919;

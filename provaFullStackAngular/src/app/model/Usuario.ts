@@ -6,7 +6,7 @@ export class Usuario {
   public nome: string;
   public email: string;
   public senha: string;
-  public dataCadastro: Data;
+  public dataCadastro: Date;
   public enderecos: Endereco[];
   public role: string;
 }

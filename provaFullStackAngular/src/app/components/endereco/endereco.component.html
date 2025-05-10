@@ -1,0 +1,39 @@
+<section>
+  <div class="bloco">
+    <div class="inputs">
+      <div class="input" style="width: 20%;" >
+        <input type="text" [(ngModel)]="this.endereco.cep" placeholder="Cep" (change)="this.searchCEP($event)" />
+      </div>
+      <div class="input" style="width: 49%;">
+        <input type="text" [(ngModel)]="this.endereco.logradouro" placeholder="Logradouro" />
+      </div>
+      <div class="input" style="width: 30%;" >
+        <input type="number" [(ngModel)]="this.endereco.numero" placeholder="Numero" />
+      </div>
+      <div class="input" style="width: 59.5%;" >
+        <input type="numtextber" [(ngModel)]="this.endereco.complemento" placeholder="Complemento" />
+      </div>
+      <div class="input" style="width: 40%;" >
+        <input type="text" [(ngModel)]="this.endereco.bairro" placeholder="Bairro" />
+      </div>
+      <div class="input" style="width: 59.5%;">
+        <input type="text" [(ngModel)]="this.endereco.cidade" placeholder="Cidade" />
+      </div>
+      <div class="input" style="width: 40%;" >
+        <input type="text" [(ngModel)]="this.endereco.estado" placeholder="Estado" />
+      </div>
+    </div>
+
+    <div class="botoes">
+      <div class="img" (click)="this.excluir()" >
+        <img src="img/icon/excluir.svg" alt="excluir" />
+      </div>
+      <div class="botao cancelar" (click)="this.cancelar()" >
+        <span>Cancelar</span>
+      </div>
+      <div class="botao" (click)="this.cadastrar()" >
+        <span>{{this.idEmpresa == 0 ? 'Cadastrar' : 'Atualizar'}}</span>
+      </div>
+    </div>
+  </div>
+</section>
