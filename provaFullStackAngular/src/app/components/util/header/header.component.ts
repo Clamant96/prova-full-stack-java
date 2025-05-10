@@ -12,5 +12,6 @@ import { environment } from '../../../../environments/environment';
 export class HeaderComponent {
 
   public id: number = environment.id;
+  public role: string = environment.role;
 
 }

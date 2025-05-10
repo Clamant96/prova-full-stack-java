@@ -13,9 +13,7 @@ export class UsuarioService {
 
   public url = environment.apiUrlAPI;
 
-  public autorizacao = {
-    headers: new HttpHeaders().set('Authorization', environment.token)
-  }
+  public autorizacao = {}
 
   constructor(
     private http: HttpClient
@@ -27,11 +25,25 @@ export class UsuarioService {
     sortBy: string,
     direction: string
   ): Observable<Page> {
+    const token = localStorage.getItem('token');
+    if (token) {
+      this.autorizacao = {
+        headers: new HttpHeaders().set('Authorization', token)
+      }
+    }
+
     let query = `?page=${page}&size=${size}&sortBy=${sortBy}&direction=${direction}`;
     return this.http.get<Page>(`${this.url}/usuario${query}`, this.autorizacao)
   }
 
   getById(id: number): Observable<Usuario> {
+    const token = localStorage.getItem('token');
+    if (token) {
+      this.autorizacao = {
+        headers: new HttpHeaders().set('Authorization', token)
+      }
+    }
+
     return this.http.get<Usuario>(`${this.url}/usuario/${id}`, this.autorizacao)
   }
 
@@ -44,10 +56,24 @@ export class UsuarioService {
   }
 
   atualizarUsuario(usuario: Usuario): Observable<Usuario> {
+    const token = localStorage.getItem('token');
+    if (token) {
+      this.autorizacao = {
+        headers: new HttpHeaders().set('Authorization', token)
+      }
+    }
+
     return this.http.put<Usuario>(`${this.url}/usuario/atualizar`, usuario, this.autorizacao)
   }
 
   deleteById(id: number) {
+    const token = localStorage.getItem('token');
+    if (token) {
+      this.autorizacao = {
+        headers: new HttpHeaders().set('Authorization', token)
+      }
+    }
+
     return this.http.delete(`${this.url}/usuario/${id}`, this.autorizacao)
   }
 
