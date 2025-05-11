@@ -11,7 +11,7 @@
 	<groupId>br.com.helpconnect</groupId>
 	<artifactId>provaFullStackJava</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 	<name>provaFullStackJava</name>
 	<description>PROVA FULLSTACK JAVA</description>
 	<url/>
@@ -91,9 +91,26 @@
 		</dependency>
 		
 		<dependency>
+		    <groupId>org.springdoc</groupId>
+		    <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+		    <version>2.1.0</version> <!-- Verifique a versão mais recente -->
+		</dependency>
+		
+		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
+		</dependency>
+		
+		<dependency>
+		    <groupId>org.mockito</groupId>
+		    <artifactId>mockito-junit-jupiter</artifactId>
+		    <version>5.4.0</version>
+		    <scope>test</scope>
+		</dependency>
+		<dependency>
+		    <groupId>org.springframework.data</groupId>
+		    <artifactId>spring-data-commons</artifactId>
 		</dependency>
 	</dependencies>
 
@@ -103,6 +120,17 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+			<plugin>
+	            <groupId>org.apache.maven.plugins</groupId>
+	            <artifactId>maven-surefire-plugin</artifactId>
+	            <configuration>
+                <includes>
+                    <!-- Inclui todas as classes de teste em qualquer pacote -->
+                    <include>**/*Test.java</include>
+                    <include>**/*Tests.java</include>
+                </includes>
+            </configuration>
+	        </plugin>
 		</plugins>
 	</build>
 
