@@ -63,6 +63,7 @@ public class BasicSecurityConfig {
             .csrf(csrf -> csrf.disable())
             .cors(withDefaults())
             .authorizeHttpRequests(auth -> auth
+        		.requestMatchers("/**").permitAll()
         		.requestMatchers(
                         "/",
                         "/index.html",
