@@ -93,11 +93,14 @@ hr {
   --background-color-button: #3bc;
   --background-color-button-hover: rgb(43, 161, 177);
   --background-color-copyright: #191919;
+  --background-color-blur: #19191970;
   --background-color-danger: #d60f0f;
   --background-color-danger-hover: #a01f1f;
 
   --button-ok: #b4b4b4;
 
   --font-family-Amaranth: 'Amaranth', sans-serif;
+
+  --box-shadow: #262626;
 
 }

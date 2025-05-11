@@ -1,6 +1,6 @@
 <header>
   <nav class="menu">
-    @if(this.role) {
+    @if(this.validaRole(this.role)) {
       <div class="botao" routerLink="/lista/usuarios" >
         <span>Usuarios</span>
       </div>

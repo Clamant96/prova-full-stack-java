@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ViewChild } from '@angular/core';
 import { Usuario } from '../../../model/Usuario';
 import { UsuarioService } from '../../../service/usuario.service';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
@@ -6,6 +6,8 @@ import { FormsModule } from '@angular/forms';
 import { EnderecosComponent } from '../../lista/enderecos/enderecos.component';
 import { environment } from '../../../../environments/environment';
 import { EnderecoComponent } from '../../endereco/endereco.component';
+import { AlertaComponent } from '../../util/alerta/alerta.component';
+import { Alerta } from '../../../model/Alerta';
 
 @Component({
   selector: 'app-usuario',
@@ -15,6 +17,8 @@ import { EnderecoComponent } from '../../endereco/endereco.component';
   styleUrl: './usuario.component.css'
 })
 export class UsuarioComponent {
+
+  @ViewChild(AlertaComponent) alertaComponent!: AlertaComponent;
 
   @Input() id: number = 0;
 
@@ -57,28 +61,55 @@ export class UsuarioComponent {
     if(id > 0) {
       this.usuarioService.getById(id).subscribe((resp: Usuario) => {
         this.usuario = resp;
+
+        this.usuario.senha = '';
+
       });
     }
 
   }
 
   atualizar() {
-    this.usuario.enderecos = [];
+    if(this.usuario?.email == '' || this.usuario?.senha == '' || this.usuario?.nome == '' || this.usuario?.role == '') {
+      let mensagem: string = `${this.usuario?.email == '' ? 'Email: NOK' : 'Email: OK'} | ${this.usuario?.senha == '' ? 'Senha: NOK' : 'Senha: OK'} | ${this.usuario?.nome == '' ? 'Nome: NOK' : 'Nome: OK'} | ${this.usuario?.role == '' ? 'Role: NOK' : 'Role: OK'}`
+      this.setMensagem({
+        titulo: 'Atualizar Usuario',
+        mensagem: `Voce deve preencher todos os campos antes de atualizar o usuario, dados validados: ${mensagem}`,
+        tipo: ''
+      });
 
-    const user: any = {
-      "id": this.usuario.id,
-      "nome": this.usuario.nome,
-      "email": this.usuario.email,
-      "senha": this.usuario.senha,
-      "role": this.usuario.role
+    } else {
+      this.usuario.enderecos = [];
+
+      const user: any = {
+        "id": this.usuario.id,
+        "nome": this.usuario.nome,
+        "email": this.usuario.email,
+        "senha": this.usuario.senha,
+        "role": this.usuario.role
+      }
+
+      this.usuarioService.atualizarUsuario(user).subscribe((resp: Usuario) => {
+        environment.id = 0;
+        environment.nome = '';
+        environment.email = '';
+        environment.senha = '';
+        environment.token = '';
+
+        this.router.navigate(['/login']);
+
+      }, err => {
+        this.setMensagem({
+          titulo: 'Atualizar Usuario',
+          mensagem: 'Ocorreu um erro ao tentar atualizar o usuario.',
+          tipo: 'erro'
+        });
+
+        console.warn('Ocorreu um erro com a atualizacao.');
+      });
+
     }
 
-    this.usuarioService.atualizarUsuario(user).subscribe((resp: Usuario) => {
-      this.router.navigate(['/login']);
-
-    }, err => {
-      console.warn('Ocorreu um erro com o cadastro.');
-    });
   }
 
   capiturarAtualizacaoEndereco(event: any) {
@@ -88,14 +119,29 @@ export class UsuarioComponent {
   }
 
   capituraIdEndereco(event: any) {
-    this.idEmpresa = event;
+    if(this.isAdicionar && this.idEmpresa != event) {
 
-    this.adicionar();
+    }else {
+      this.abrir();
+    }
+
+    this.idEmpresa = event;
 
   }
 
-  adicionar() {
+  abrir() {
     this.isAdicionar = !this.isAdicionar;
+  }
+
+  adicionar() {
+    this.idEmpresa = 0;
+
+    this.isAdicionar = !this.isAdicionar;
+  }
+
+  setMensagem(alerta: Alerta) {
+    this.alertaComponent.setObjAlerta(alerta);
+    this.alertaComponent.openModal();
   }
 
 }

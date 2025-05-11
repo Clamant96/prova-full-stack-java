@@ -14,4 +14,8 @@ export class HeaderComponent {
   public id: number = environment.id;
   public role: string = environment.role;
 
+  validaRole(role: string) {
+    return role.includes('ADMIN');
+  }
+
 }

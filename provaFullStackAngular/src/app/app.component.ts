@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { HeaderComponent } from "./components/util/header/header.component";
 import { environment } from '../environments/environment';
+import { AlertaComponent } from './components/util/alerta/alerta.component';
 
 @Component({
   selector: 'app-root',

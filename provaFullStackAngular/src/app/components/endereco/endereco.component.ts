@@ -1,10 +1,12 @@
 import { UsuarioService } from './../../service/usuario.service';
 import { EnderecoService } from './../../service/endereco.service';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Endereco } from '../../model/Endereco';
 import { Usuario } from '../../model/Usuario';
 import { Page } from '../../model/Page';
+import { AlertaComponent } from '../util/alerta/alerta.component';
+import { Alerta } from '../../model/Alerta';
 
 @Component({
   selector: 'app-endereco',
@@ -13,12 +15,26 @@ import { Page } from '../../model/Page';
   templateUrl: './endereco.component.html',
   styleUrl: './endereco.component.css'
 })
-export class EnderecoComponent {
+export class EnderecoComponent implements OnChanges {
+
+  @ViewChild(AlertaComponent) alertaComponent!: AlertaComponent;
 
   @Input() idEmpresa: number = 0;
   @Input() idUsuario: number = 0;
 
   @Output() enderecoOutput = new EventEmitter<Endereco>();
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['idEmpresa']) {
+      console.log('idEmpresa mudou:', changes['idEmpresa'].currentValue);
+
+      if(this.idEmpresa > 0) {
+        this.getByIdEndereco(this.idEmpresa);
+      }
+
+    }
+
+  }
 
   public endereco: Endereco = new Endereco();
   public usuario: Usuario = new Usuario();
@@ -51,10 +67,18 @@ export class EnderecoComponent {
   }
 
   searchCEP(event: any) {
-    this.enderecoService.getByCep(event.target.value).subscribe((resp: Endereco) => {
+    let cep: string = event?.target?.value;
+
+    this.enderecoService.getByCep(cep.replace(/\D/g, '')).subscribe((resp: Endereco) => {
       this.endereco = resp;
 
       console.log('this.endereco: ', this.endereco);
+    }, err => {
+      this.setMensagem({
+        titulo: 'Busca CEP',
+        mensagem: `O CEP: ${cep} informado nao foi localizado.`,
+        tipo: ''
+      });
     });
   }
 
@@ -78,6 +102,12 @@ export class EnderecoComponent {
   excluir() {
     this.enderecoService.deleteById(this.idEmpresa).subscribe((resp: any) => {
       this.eviaAtualizacaoEnderecoOutput(new Endereco());
+    }, err => {
+      this.setMensagem({
+        titulo: 'Excluir Endereco',
+        mensagem: 'Ocorreu um erro ao tentar excluir o endereco.',
+        tipo: 'erro'
+      });
     });
 
   }
@@ -92,7 +122,18 @@ export class EnderecoComponent {
 
     this.enderecoService.cadastrarEndereco(this.endereco).subscribe((resp: Endereco) => {
       this.eviaAtualizacaoEnderecoOutput(resp);
-    })
+    }, err => {
+      this.setMensagem({
+        titulo: 'Cadastrar Endereco',
+        mensagem: 'Ocorreu um erro ao tentar cadastrar o endereco.',
+        tipo: 'erro'
+      });
+    });
+  }
+
+  setMensagem(alerta: Alerta) {
+    this.alertaComponent.setObjAlerta(alerta);
+    this.alertaComponent.openModal();
   }
 
 }
