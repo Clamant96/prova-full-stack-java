@@ -8,6 +8,9 @@
         <span>Endereços</span>
       </div>
     }
+    <div class="botao" (click)="this.logout()" >
+      <span>Logout</span>
+    </div>
     <div class="img" [routerLink]="['/editar/usuario', this.id]" >
       <img src="img/perfil/perfil.png" alt="perfil" />
     </div>
